@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>花瓣字「各」字族｜學習遊戲</title>
+  <style>
+    :root{
+      --bg:#fbf6f6; /* 淺粉色底 */
+      --c1:#fce6e6; /* 暖粉 */
+      --c2:#e6fcfc; /* 淺青 */
+      --c3:#f6e6fc; /* 淺紫 */
+      --c4:#fcfce6; /* 淺黃 */
+      --txt:#333;
+      --accent:#ff7aa2;
+      --accent2:#6cc4ff;
+      --good:#64b971; /* 新的綠色 */
+      --bad:#e27b7b; /* 新的紅色 */
+      --shadow:0 8px 16px rgba(0,0,0,.06);
+      --radius:18px;
+    }
+    html,body{height:100%}
+    body{
+      margin:0; font-family: "Microsoft JhengHei","Noto Sans TC",system-ui,-apple-system,Segoe UI,Roboto;
+      color:var(--txt);
+      background: radial-gradient(1200px 800px at 20% -10%, var(--c2), transparent 60%),
+                  radial-gradient(900px 700px at 120% 0%, var(--c3), transparent 50%),
+                  radial-gradient(700px 500px at 0% 110%, var(--c1), transparent 60%),
+                  var(--bg);
+    }
+    header{
+      padding:18px 20px 8px; text-align:center;
+    }
+    h1{
+      margin:0; font-size:2.2rem; letter-spacing:.02em;
+      color:#5e274b; /* 深粉色標題 */
+    }
+    .subtitle{margin-top:6px; color:#855e7a; font-size:1.05rem}
+    .container{
+      max-width:1100px; margin:14px auto 40px; padding:0 16px;
+    }
+    .toolbar{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center; margin:14px 0 8px;
+    }
+    .pill{
+      background:white; border-radius:999px; padding:10px 14px; box-shadow:var(--shadow);
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .btn{
+      appearance:none; border:none; border-radius:12px; padding:10px 14px;
+      background:linear-gradient(180deg, #fff, #f6f6f6); box-shadow:var(--shadow);
+      cursor:pointer; font-size:1rem;
+      transition:transform 0.1s ease, box-shadow 0.1s ease;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 20px rgba(0,0,0,.1);
+    }
+    .btn.primary{background:linear-gradient(180deg, #ffdeee, #ffd2e1); color:#7c1641; font-weight:700}
+    .btn.accent{background:linear-gradient(180deg, #d9f1ff, #c7e9ff); color:#0b5680; font-weight:700}
+    .btn.good{background:linear-gradient(180deg, #d4ffd4, #b9ffb9); color:#1c813a; font-weight:700}
+    .btn.bad{background:linear-gradient(180deg, #ffdede, #ffc9c9); color:#a82020; font-weight:700}
+    .tabs{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:12px 0 18px}
+    .tab{padding:10px 14px; border-radius:999px; background:white; box-shadow:var(--shadow); cursor:pointer; font-weight:700; transition:all .2s;}
+    .tab.active{background:linear-gradient(180deg,#fff,#ffeef5); border:2px solid var(--accent); color:#7c1641; transform:translateY(-2px); box-shadow:0 10px 20px rgba(0,0,0,.15);}
+    .tab:hover:not(.active){transform:translateY(-1px);}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    .card{
+      background:white; border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:18px; margin-bottom:18px;
+    }
+    .card-title{
+      font-size:1.3rem; font-weight:800; display:flex; align-items:center; gap:12px;
+      color:#5e274b;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px dashed #f0f0f0;
+    }
+    .card-g1 {background-color: var(--c2);} /* 淺青色給關卡一 */
+    .card-g2 {background-color: var(--c4);} /* 淺黃色給關卡二 */
+    .card-g3 {background-color: var(--c1);} /* 暖粉色給關卡三 */
+    .card-g4 {background-color: var(--c3);} /* 淺紫色給關卡四 */
+    
+    .inst{font-size:1.05rem; color:#444; margin:10px 0 6px; line-height:1.6}
+    .big{font-size:1.8rem}
+    .xl{font-size:2.6rem}
+    .grid{
+      display:grid; gap:14px;
+    }
+    @media (min-width:800px){
+      .grid.cols-2{grid-template-columns:1fr 1fr;}
+      .grid.cols-3{grid-template-columns:repeat(3,1fr);}
+      .grid.cols-4{grid-template-columns:repeat(4,1fr);}
+    }
+    .option{
+      background:linear-gradient(180deg, #fff, #f9f9f9); border-radius:16px; padding:16px;
+      text-align:center; cursor:pointer; border:2px solid transparent; transition:.15s;
+      min-height:90px; display:flex; flex-direction:column; justify-content:center; gap:6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,.08);
+    }
+    .option:hover{transform:translateY(-2px); box-shadow:0 8px 16px rgba(0,0,0,.12);}
+    .option.correct{border-color:var(--good); background:var(--c4);}
+    .option.wrong{border-color:var(--bad); background:#ffe7e7;}
+    .han{font-size:2.2rem; font-weight:900}
+    .bpmf{font-size:1.1rem; color:#666}
+    .def{font-size:1rem; color:#555}
+
+    .row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+    .draggable{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:72px; height:72px; border-radius:16px; background:#fff; box-shadow:var(--shadow); cursor:pointer;
+      font-size:2.2rem; font-weight:900; border:2px dashed #eee; user-select:none;
+      transition:transform 0.1s ease;
+      position: relative;
+    }
+    .draggable:hover{transform:scale(1.05);}
+    .draggable:active{transform:scale(0.95);}
+    .draggable.selected{
+      border-color: var(--accent);
+      background: linear-gradient(180deg, #fff, #ffeef5);
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(255, 122, 162, 0.3);
+    }
+    .dropzone{
+      min-width:72px; min-height:72px; border-radius:16px; border:3px dashed #bbb; background:#fafafa;
+      display:inline-flex; align-items:center; justify-content:center; font-size:2rem; font-weight:900; padding:6px 10px;
+      cursor:pointer; transition:all 0.2s ease;
+    }
+    .dropzone:hover{
+      border-color: var(--accent);
+      background: #f8f8ff;
+    }
+    .dropzone.ok{border-color:var(--good); background:#e6f9e6;}
+    .dropzone.no{border-color:var(--bad); background:#f9e6e6;}
+    .dropzone.highlighted{
+      border-color: var(--accent);
+      background: linear-gradient(180deg, #fff, #ffeef5);
+      transform: scale(1.05);
+    }
+    
+    /* G2 new styles */
+    .g2-grid-container {
+      display: grid;
+      grid-template-columns: 1fr 200px 1fr; /* 三欄佈局，中間拖曳區固定寬度 */
+      gap: 20px;
+    }
+    .g2-drag-pool {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 10px;
+      border-radius: var(--radius);
+      background: white; /* 拖曳區背景維持白色 */
+      box-shadow: inset 0 0 8px rgba(0,0,0,.1);
+    }
+    .g2-board-card {
+      background: var(--c2); /* 左右填空區背景 */
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .g2-drag-pool .draggable {
+      width: 100%;
+      height: 72px;
+      border: none;
+      background: #fff;
+    }
+    .g2-board {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    @media (max-width: 800px) {
+      .g2-grid-container {
+        grid-template-columns: 1fr; /* 小螢幕改為單欄 */
+      }
+      .g2-drag-pool {
+        flex-direction: row; /* 小螢幕拖曳區改為橫向 */
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 10px 14px;
+        order: -1; /* 小螢幕下將字卡區移到最上面 */
+      }
+      .g2-drag-pool .draggable {
+        width: 72px;
+        height: 72px;
+      }
+    }
+    .hint-text {
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 8px;
+    }
+
+    /* 關卡三新樣式 */
+    .g3-grid-container {
+      /* 調整兩欄寬度並增加間距 */
+      display: grid;
+      grid-template-columns: minmax(180px, 220px) 1fr;
+      gap: 40px; /* 增加兩欄之間的間距 */
+    }
+    @media (max-width: 800px) {
+      .g3-grid-container {
+        grid-template-columns: 1fr; /* 小螢幕改為單欄 */
+      }
+    }
+    .word-chip-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .word-chip{
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      text-align: center;
+      height: 60px; /* 固定高度，讓卡片大小一致 */
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .word-chip:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,.12);
+    }
+    .word-chip:active{transform: translateY(0); box-shadow: 0 4px 8px rgba(0,0,0,.08);}
+    .word-chip.selected{
+      border: 3px solid var(--accent);
+      background: linear-gradient(180deg, #fff, #ffeef5);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    /* 關卡四新樣式 */
+    .g4-grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 兩欄佈局 */
+      gap: 20px;
+    }
+    @media (max-width: 800px) {
+      .g4-grid-container {
+        grid-template-columns: 1fr; /* 小螢幕改為單欄 */
+      }
+    }
+    .g4-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      font-size: 1.6rem; /* 加大字體 */
+      font-weight: 700;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 12px; /* 增加行間距 */
+    }
+    .g4-line:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,.1);
+    }
+    .g4-line.active {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,.15);
+      border: 3px solid #7c1641;
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.02); }
+    }
+    .g4-line-icon {
+      font-size: 2.2rem;
+    }
+    .g4-line.c1 { background-color: var(--c1); }
+    .g4-line.c2 { background-color: var(--c2); }
+    .g4-line.c3 { background-color: var(--c3); }
+    .g4-line.c4 { background-color: var(--c4); }
+
+
+    .line{padding:10px 14px; border-radius:12px; background:#fff; box-shadow:var(--shadow); font-size:1.3rem; line-height:1.8}
+    .line.active{background:linear-gradient(180deg,#fff,#fef6ff); border:2px solid var(--accent)}
+    .line.highlighted{
+      border-color: var(--accent);
+      background: linear-gradient(180deg,#fff,#fef6ff);
+      transform: scale(1.02);
+    }
+    .tags{display:flex; gap:8px; flex-wrap:wrap}
+    .tag{background:#fff; padding:6px 10px; border-radius:999px; box-shadow:var(--shadow); font-size:.95rem}
+    .score{font-weight:800; color:#1c813a}
+    .muted{color:#666}
+    .flex-center{display:flex; align-items:center; justify-content:center}
+    .equal-sign{font-size:2.5rem; margin:0 8px;}
+
+    .footer-note{font-size:.95rem; color:#666; text-align:center; margin-top:20px}
+    .tiny{font-size:.92rem; color:#777}
+
+    /* cute emoji confetti */
+    .confetti{
+      position:fixed; top:0; left:0; width:100%; height:0; pointer-events:none; overflow:visible;
+    }
+    .confetti span{
+      position:absolute; top:-20px; font-size:24px; animation:fall 1.6s ease-in forwards;
+    }
+    @keyframes fall{
+      100%{transform:translateY(110vh) rotate(720deg); opacity:.2}
+    }
+  
+/* 關卡三字體調整 */
+#g3 .word-chip {
+  font-size: 3em !important; /* 左邊詞語放大3倍 */
+}
+
+#g3 .line {
+  font-size: 2em !important; /* 右邊解釋放大2倍 */
+}
+
+
+/* 關卡三：詞語與解釋區塊樣式調整 */
+#g3 .word-chip,
+#g3 .line {
+  border-radius: 999px !important; /* 圓角弧形 */
+  height: 70px; /* 統一高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* 讓左右欄位對齊 */
+#g3 .g3-grid-container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: flex-start;
+}
+/* 關卡三：左右欄位背景色區隔 */
+#g3 .g3-grid-container > div:first-child {
+  background-color: var(--c2); /* 淺青：左邊詞語 */
+  padding: 12px;
+  border-radius: var(--radius);
+}
+
+#g3 .g3-grid-container > div:last-child {
+  background-color: var(--c4); /* 淺黃：右邊解釋 */
+  padding: 12px;
+  border-radius: var(--radius);
+}
+
+</style>
+</head>
+<body>
+  <header>
+    <h1>🌸 花辦字「各」家族：小小文字探險家</h1>
+    <div class="subtitle">駱、格、客、閣、絡、賂、酪、洛、落、路、略｜大字體．可愛介面．可朗讀</div>
+  </header>
+
+  <div class="container">
+    <div class="toolbar">
+      <div class="pill">
+        <button class="btn accent" id="btnSpeakAll" aria-label="朗讀本頁標題">🔊 朗讀標題</button>
+        <button class="btn" id="btnVoiceCheck">🗣️ 語音檢查</button>
+        <span class="tiny" id="voiceStatus" aria-live="polite">建議使用支援中文朗讀的裝置、瀏覽器</span>
+      </div>
+      <div class="pill">
+        <span>進度：</span>
+        <span class="score" id="score">0</span>
+        <span class="muted">分</span>
+        <button class="btn" id="btnReset">🔄 全部重玩</button>
+      </div>
+    </div>
+
+    <nav class="tabs" role="tablist" aria-label="遊戲關卡選單">
+      <button class="tab active" data-tab="g1" role="tab" aria-controls="g1">🧠 關卡一</button>
+      <button class="tab" data-tab="g2" role="tab" aria-controls="g2">🧩 關卡二</button>
+      <button class="tab" data-tab="g3" role="tab" aria-controls="g3">🔗 關卡三</button>
+      <button class="tab" data-tab="g4" role="tab" aria-controls="g4">📖 關卡四</button>
+    </nav>
+
+    <!-- 關卡一：部件猜字（視覺化點選） -->
+    <section class="panel active" id="g1" role="tabpanel" aria-labelledby="tab-g1">
+      <div class="card card-g1">
+        <div class="card-title">🧠 關卡一：部件猜字（點選正確的部件來組字）</div>
+        <p class="inst">1. 觀察畫面中的提示，例如：「各 + ? = 駱」。2. 從選項中找出正確的部件。3. 答對得分，挑戰下一個字！</p>
+        <div id="g1Question" class="flex-center" style="margin:20px 0;">
+          <!-- 任務會在這裡動態生成 -->
+        </div>
+        <div class="grid cols-3" id="g1Options" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- 關卡二：填字造詞（點選方式） -->
+    <section class="panel" id="g2" role="tabpanel" aria-labelledby="tab-g2">
+      <div class="card card-g2">
+        <div class="card-title">🧩 關卡二：填字造詞（點選正確的字填入空格）</div>
+        <p class="inst">1. 觀察題目中的詞語。2. 點選正確的字來填入「空格」。3. 全部答對就通關！</p>
+        <div class="g2-grid-container">
+          <!-- 左側填空區 -->
+          <div class="g2-board" id="g2BoardLeft"></div>
+          <!-- 中間字卡區 -->
+          <div class="g2-drag-pool" id="g2Pool" aria-label="可選擇的字卡區">
+            <div class="inst" style="text-align:center;">點選字卡</div>
+          </div>
+          <!-- 右側填空區 -->
+          <div class="g2-board" id="g2BoardRight"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 關卡三：詞義配對（點選方式） -->
+    <section class="panel" id="g3" role="tabpanel" aria-labelledby="tab-g3">
+      <div class="card card-g3">
+        <div class="card-title">🔗 關卡三：詞義配對（點選詞語再點對應解釋）</div>
+        <p class="inst">1. 讀解釋。2. 先點選「詞語」，再點選對應的「解釋」。3. 完成全部配對就通關。</p>
+        <div class="g3-grid-container">
+          <div>
+            <div class="inst"><strong>請點選的詞語：</strong></div>
+            <div class="word-chip-container" id="g3Words"></div>
+          </div>
+          <div>
+            <div class="inst"><strong>解釋（點這裡）：</strong></div>
+            <div class="grid" id="g3Defs" style="grid-template-columns:1fr; gap:10px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 關卡四：唸謠朗讀 -->
+    <section class="panel" id="g4" role="tabpanel" aria-labelledby="tab-g4">
+      <div class="card card-g4">
+        <div class="card-title">📖 關卡四：唸謠朗讀（跟著節奏唸一唸）</div>
+        <p class="inst">1. 點「逐行播放」聽每一行。2. 也可以點選任何一行來單獨朗讀。3. 試著大聲跟讀！</p>
+        <div class="row" style="gap:8px; margin:8px 0 12px;">
+          <button class="btn primary" id="g4PlaySeq">▶️ 逐行播放</button>
+          <button class="btn" id="g4Stop">⏹️ 停止</button>
+        </div>
+        <div class="g4-grid-container" id="g4Lines">
+          <!-- 唸謠內容會在這裡動態生成 -->
+        </div>
+      </div>
+      <div class="card card-g4">
+        <div class="inst"><strong>補充小知識：</strong></div>
+        <div class="tags">
+          <span class="tag">「各」字族在組合中常當部件使用</span>
+          <span class="tag">例：駱（ㄌㄨㄛˋ）、格（ㄍㄜˊ）、客（ㄎㄜˋ）</span>
+          <span class="tag">「洛」落，發音相同但意義不同</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">提示：若沒聽到聲音，請先點擊頁面任意處啟用音訊，或點「語音檢查」。</div>
+    <div class="confetti" id="confetti"></div>
+  </div>
+
+  <script>
+    // ========= 資料 =========
+    const chars = [
+      {han:'骼', bpmf:'ㄌㄨㄛˋ', hint:'骨頭的架構', voice:'骼'},
+      {han:'格', bpmf:'ㄍㄜˊ', hint:'規格、品格', voice:'格'},
+      {han:'客', bpmf:'ㄎㄜˋ', hint:'客人', voice:'客'},
+      {han:'閣', bpmf:'ㄍㄜˊ', hint:'樓閣', voice:'閣'},
+      {han:'絡', bpmf:'ㄌㄨㄛˋ', hint:'聯絡、網絡', voice:'絡'},
+      {han:'賂', bpmf:'ㄌㄨˋ', hint:'賄賂', voice:'賂'},
+      {han:'酪', bpmf:'ㄌㄠˋ', hint:'乳酪', voice:'酪'},
+      {han:'洛', bpmf:'ㄌㄨㄛˋ', hint:'洛陽', voice:'洛'},
+      {han:'落', bpmf:'ㄌㄨㄛˋ', hint:'落下', voice:'落'},
+      {han:'路', bpmf:'ㄌㄨˋ', hint:'道路', voice:'路'},
+      {han:'略', bpmf:'ㄌㄩㄝˋ', hint:'策略', voice:'略'},
+      {han:'駱', bpmf:'ㄌㄨㄛˋ', hint:'動物名稱', voice:'駱'},
+    ];
+
+    const g1Compositions = [
+      {han:'駱', parts:['各', '馬']},
+      {han:'格', parts:['各', '木']},
+      {han:'客', parts:['各', '宀']},
+      {han:'閣', parts:['各', '門']},
+      {han:'絡', parts:['各', '糸']},
+      {han:'賂', parts:['各', '貝']},
+      {han:'酪', parts:['各', '酉']},
+      {han:'洛', parts:['各', '水']},
+      {han:'落', parts:['洛', '艸']},
+      {han:'路', parts:['各', '足']},
+      {han:'略', parts:['各', '田']},
+    ];
+    const commonParts = ['馬', '木', '宀', '門', '糸', '貝', '酉', '水', '足', '田', '心', '土', '手', '艸', '王', '人', '口', '石'];
+
+    const words = [
+      {han:'骨骼', bpmf:'ㄍㄨˇ ㄍㄜˊ', def:'身體的骨頭架構'},
+      {han:'格式', bpmf:'ㄍㄜˊ ㄕˋ', def:'固定的樣式或標準'},
+      {han:'客人', bpmf:'ㄎㄜˋ ㄖㄣˊ', def:'來訪的人'},
+      {han:'樓閣', bpmf:'ㄌㄡˊ ㄍㄜˊ', def:'高大的建築物'},
+      {han:'聯絡', bpmf:'ㄌㄧㄢˊ ㄌㄨㄛˋ', def:'彼此溝通連繫'},
+      {han:'賄賂', bpmf:'ㄏㄨㄟˋ ㄌㄨˋ', def:'用金錢收買他人'},
+      {han:'乳酪', bpmf:'ㄖㄨˇ ㄌㄠˋ', def:'用牛奶製成的食品'},
+      {han:'洛陽', bpmf:'ㄌㄨㄛˋ ㄧㄤˊ', def:'中國古都名'},
+      {han:'陷落', bpmf:' ㄒㄧㄢˋㄌㄨㄛˋ', def:'從上往下掉'},
+      {han:'道路', bpmf:'ㄉㄠˋ ㄌㄨˋ', def:'供人行走的通道'},
+      {han:'策略', bpmf:'ㄘㄜˋ ㄌㄩㄝˋ', def:'達成目標的計畫方法'},
+      {han:'價格', bpmf:'ㄐㄧㄚˋ ㄍㄜˊ', def:'商品的售價'},
+    ];
+
+    // 修改唸謠內容
+    const rhymeLines = [
+      {text:'洛陽一間小閣樓，', icon:'🏛️', color:'c1'},
+      {text:'客人都要吃乳酪；', icon:'🧀', color:'c2'},
+      {text:'路上預約已滿額，', icon:'🛣️', color:'c3'},
+      {text:'價格太高難賄賂；', icon:'💰', color:'c4'},
+      {text:'骨骼粗壯騎駱駝，', icon:'🐎', color:'c1'},
+      {text:'策略落後再聯絡，', icon:'📞', color:'c2'},
+      {text:'吃完各個笑容露。', icon:'😊', color:'c3'},
+    ];
+
+    // ========= 公用：語音 =========
+    let voices = [];
+    function loadVoices(){
+      voices = speechSynthesis.getVoices();
+      const zh = voices.filter(v => (v.lang||'').toLowerCase().startsWith('zh'));
+      const status = document.getElementById('voiceStatus');
+      if(zh.length){
+        const tw = zh.find(v => v.lang.toLowerCase().includes('zh-tw'));
+        const pick = tw || zh[0];
+        status.textContent = `已找到語音：${pick.name}（${pick.lang}）`;
+      }else{
+        status.textContent = '尚未偵測到中文語音，仍可嘗試播放';
+      }
+    }
+    if('speechSynthesis' in window){
+      loadVoices();
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    function speak(text, rate=0.9){
+      if(!('speechSynthesis' in window)) return;
+      const u = new SpeechSynthesisUtterance(text);
+      const zhTW = voices.find(v => v.lang && v.lang.toLowerCase().includes('zh-tw'));
+      const zhAny = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('zh'));
+      u.voice = zhTW || zhAny || null;
+      u.rate = rate;
+      u.pitch = 1;
+      u.volume = 1;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+
+    // ========= 工具 =========
+    const rand = (n)=> Math.floor(Math.random()*n);
+    const shuffle = arr => arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]);
+
+    function confettiBurst(){
+      const c = document.getElementById('confetti');
+      const icons = ['✨','🌸','⭐','💖','🎉','🌟','🧸','🎈'];
+      for(let i=0;i<16;i++){
+        const s = document.createElement('span');
+        s.textContent = icons[rand(icons.length)];
+        s.style.left = (Math.random()*100)+'%';
+        s.style.animationDelay = (Math.random()*0.4)+'s';
+        c.appendChild(s);
+        setTimeout(()=>s.remove(), 1700);
+      }
+    }
+
+    // ========= 進度 =========
+    let score = 0;
+    function addScore(n=1){
+      score += n;
+      document.getElementById('score').textContent = score;
+    }
+    function resetAll(){
+      score = 0; document.getElementById('score').textContent = score;
+      initG1(); initG2(); initG3(); initG4();
+    }
+
+    // ========= 關卡一：部件猜字 =========
+    let g1Answer = null;
+    let g1Questions = [];
+    let g1CurrentIdx = 0;
+
+    function pickG1Question(){
+      if(g1Questions.length === 0){
+        // 確保題目都以「各」作為主題字，且另一半是隨機的
+        g1Questions = shuffle([...g1Compositions]);
+      }
+      if(g1CurrentIdx >= g1Questions.length){
+        speak('恭喜你，完成了所有組字挑戰！');
+        g1CurrentIdx = 0;
+        g1Questions = shuffle([...g1Compositions]);
+        setTimeout(pickG1Question, 2500); // 循環挑戰
+        return;
+      }
+      
+      const targetItem = g1Questions[g1CurrentIdx];
+      const allParts = targetItem.parts;
+      const questionBox = document.getElementById('g1Question');
+      
+      // 處理單部件組合
+      const answerPart = allParts.find(p => p !== '各');
+      
+      questionBox.innerHTML = `
+        <div class="han xl">各</div>
+        <span class="equal-sign">+</span>
+        <div class="han xl">?</div>
+        <span class="equal-sign">=</span>
+        <div class="han xl">${targetItem.han}</div>
+      `;
+
+      const optionsSet = new Set([answerPart]);
+      while(optionsSet.size < 3){
+        const randPart = commonParts[rand(commonParts.length)];
+        if(randPart !== '各' && !allParts.includes(randPart) && randPart !== answerPart){
+          optionsSet.add(randPart);
+        }
+      }
+      const options = shuffle([...optionsSet]);
+
+      const box = document.getElementById('g1Options');
+      box.innerHTML = '';
+      options.forEach(p=>{
+        const div = document.createElement('button');
+        div.className = 'option';
+        div.setAttribute('aria-label', `選項 ${p}`);
+        div.innerHTML = `<div class="han xl">${p}</div>`;
+        div.addEventListener('click', ()=>{
+          if(p === answerPart){
+            div.classList.add('correct');
+            addScore(1);
+            confettiBurst();
+            speak(`太棒了！答案是：${p}。${targetItem.han}這個字就是由 ${allParts.join('和')} 組成的喔！`);
+            g1CurrentIdx++;
+            setTimeout(pickG1Question, 3000);
+          }else{
+            div.classList.add('wrong');
+            speak('這個不是正確的部件，再想想看喔');
+            setTimeout(()=> div.classList.remove('wrong'), 800);
+          }
+        });
+        box.appendChild(div);
+      });
+      
+      speak(`請找出這個字的組成部件：${targetItem.han}`);
+    }
+
+    function initG1(){
+      g1Questions = shuffle([...g1Compositions]);
+      g1CurrentIdx = 0;
+      pickG1Question();
+    }
+
+    // ========= 關卡二：填字造詞（改為點選方式） =========
+    const g2Items = [
+      {tmpl:'品_', ans:'格', word:'品格', def:'品行'},
+      {tmpl:'_人', ans:'客', word:'客人', def:'來訪的人'},
+      {tmpl:'骨_', ans:'骼', word:'骨骼', def:'身體的骨頭架構'},
+      {tmpl:'樓_', ans:'閣', word:'樓閣', def:'高大的建築物'},
+      {tmpl:'聯_', ans:'絡', word:'聯絡', def:'彼此溝通連繫'},
+      {tmpl:'賄_', ans:'賂', word:'賄賂', def:'用金錢收買他人'},
+      {tmpl:'乳_', ans:'酪', word:'乳酪', def:'用牛奶製成的食品'},
+      {tmpl:'_陽', ans:'洛', word:'洛陽', def:'中國古都名'},
+      {tmpl:'陷_', ans:'落', word:'陷落', def:'從上往下掉'},
+      {tmpl:'道_', ans:'路', word:'道路', def:'供人行走的通道'},
+      {tmpl:'策_', ans:'略', word:'策略', def:'達成目標的計畫方法'},
+      {tmpl:'_駝', ans:'駱', word:'駱駝', def:'動物'},
+    ];
+
+    let g2SelectedChar = null;
+    let g2CompletedItems = new Set();
+
+    function initG2(){
+      const boardLeft = document.getElementById('g2BoardLeft');
+      const boardRight = document.getElementById('g2BoardRight');
+      const pool = document.getElementById('g2Pool');
+      boardLeft.innerHTML = '';
+      boardRight.innerHTML = '';
+      pool.innerHTML = '<div class="inst" style="text-align:center;">點選字卡</div>';
+      g2SelectedChar = null;
+      g2CompletedItems.clear();
+      
+      const useItems = shuffle(g2Items);
+      const leftItems = useItems.slice(0, 5);
+      const rightItems = useItems.slice(5, 11);
+
+      // 產生左側填空區
+      leftItems.forEach(it => {
+        const card = document.createElement('div');
+        card.className='g2-board-card';
+        const tmplParts = it.tmpl.split('_');
+        const cardHtml = `
+          <div class="row">
+            ${tmplParts.map((p,i) => {
+              let partHtml = `<div class="big">${p}</div>`;
+              if (i < tmplParts.length - 1) { // 加上空位
+                partHtml += `<div class="dropzone" data-ans="${it.ans}" data-word="${it.word}" aria-label="填字空格" tabindex="0">_</div>`;
+              }
+              return partHtml;
+            }).join('')}
+          </div>
+          <div class="hint-text">提示：${it.def}</div>
+        `;
+        card.innerHTML = cardHtml;
+        boardLeft.appendChild(card);
+      });
+      
+      // 產生右側填空區
+      rightItems.forEach(it => {
+        const card = document.createElement('div');
+        card.className='g2-board-card';
+        const tmplParts = it.tmpl.split('_');
+        const cardHtml = `
+          <div class="row">
+            ${tmplParts.map((p,i) => {
+              let partHtml = `<div class="big">${p}</div>`;
+              if (i < tmplParts.length - 1) { // 加上空位
+                partHtml += `<div class="dropzone" data-ans="${it.ans}" data-word="${it.word}" aria-label="填字空格" tabindex="0">_</div>`;
+              }
+              return partHtml;
+            }).join('')}
+          </div>
+          <div class="hint-text">提示：${it.def}</div>
+        `;
+        card.innerHTML = cardHtml;
+        boardRight.appendChild(card);
+      });
+
+      // 產生字卡
+      const allChars = shuffle(chars.map(c=>c.han));
+      allChars.forEach(h=>{
+        const d = document.createElement('div');
+        d.className='draggable';
+        d.textContent = h;
+        d.setAttribute('data-char', h);
+        d.addEventListener('click', ()=> {
+          // 清除之前選擇的字卡
+          document.querySelectorAll('.g2-drag-pool .draggable').forEach(el => el.classList.remove('selected'));
+          // 標記當前選擇
+          d.classList.add('selected');
+          g2SelectedChar = h;
+        });
+        pool.appendChild(d);
+      });
+
+      // 為空格添加點選事件
+      document.querySelectorAll('#g2BoardLeft .dropzone, #g2BoardRight .dropzone').forEach(z=>{
+        z.addEventListener('click', ()=>{
+          if(!g2SelectedChar) {
+            speak('請先點選一個字卡');
+            return;
+          }
+          
+          const ans = z.dataset.ans;
+          const word = z.dataset.word;
+          
+          if(g2CompletedItems.has(ans)) return; // 已完成的項目不再處理
+          
+          if(!z.textContent || z.textContent==='_'){
+            z.textContent = g2SelectedChar;
+          }
+          
+          if(g2SelectedChar === ans){
+            z.classList.remove('no'); 
+            z.classList.add('ok');
+            addScore(1);
+            confettiBurst();
+            speak(`太棒了！完成：${word}`);
+            
+            g2CompletedItems.add(ans);
+            
+            // 移除已使用的字卡
+            const usedCard = [...pool.children].find(c => c.getAttribute('data-char') === g2SelectedChar);
+            if(usedCard) {
+              usedCard.style.transition = 'all 0.3s ease';
+              usedCard.style.opacity = '0';
+              usedCard.style.transform = 'scale(0.8)';
+              setTimeout(() => usedCard.remove(), 300);
+            }
+            
+            g2SelectedChar = null;
+            document.querySelectorAll('.g2-drag-pool .draggable').forEach(el => el.classList.remove('selected'));
+          } else {
+            z.classList.remove('ok'); 
+            z.classList.add('no');
+            speak('再試一次');
+            setTimeout(()=> {
+              z.classList.remove('no');
+              z.textContent = '_';
+            }, 1000);
+          }
+        });
+        
+        z.addEventListener('mouseenter', ()=> {
+          if(g2SelectedChar && !g2CompletedItems.has(z.dataset.ans)) {
+            z.classList.add('highlighted');
+          }
+        });
+        
+        z.addEventListener('mouseleave', ()=> {
+          z.classList.remove('highlighted');
+        });
+      });
+    }
+
+    // ========= 關卡三：詞義配對（改為點選方式） =========
+    let g3CompletedPairs = new Set();
+    let g3SelectedWord = null;
+
+    function initG3(){
+      const pool = document.getElementById('g3Words');
+      const defs = document.getElementById('g3Defs');
+      pool.innerHTML=''; 
+      defs.innerHTML='';
+      g3CompletedPairs.clear();
+      g3SelectedWord = null;
+      
+      const use = shuffle(words.slice(0));
+      
+      // 創建詞語卡片
+      use.forEach(w=>{
+        const chip = document.createElement('div');
+        chip.className='word-chip';
+        chip.textContent = w.han;
+        chip.setAttribute('data-word', w.han);
+        chip.addEventListener('click', () => {
+          if(g3CompletedPairs.has(w.han)) return; // 已完成的詞語不能再選
+          
+          // 清除之前選擇
+          document.querySelectorAll('.word-chip').forEach(c => c.classList.remove('selected'));
+          // 標記當前選擇
+          chip.classList.add('selected');
+          g3SelectedWord = w.han;
+          speak(`已選擇：${w.han}`);
+        });
+        pool.appendChild(chip);
+      });
+      
+      // 創建解釋區域
+      shuffle(use).forEach((w, index)=>{
+        const box = document.createElement('div');
+        box.className='line dropzone';
+        box.setAttribute('data-ans', w.han);
+        box.setAttribute('data-index', index);
+        box.innerHTML = `<div><strong>${w.def}</strong></div><div class="muted">${w.bpmf}</div>`;
+        
+        box.addEventListener('click', () => {
+          if(!g3SelectedWord) {
+            speak('請先點選一個詞語');
+            return;
+          }
+          
+          if(g3CompletedPairs.has(w.han)) return; // 已完成的配對不再處理
+          
+          if(g3SelectedWord === w.han){
+            box.classList.add('ok');
+            box.innerHTML = `${w.han}（${w.bpmf}）：${w.def}`;
+            addScore(1);
+            confettiBurst();
+            speak(`${w.han}，${w.bpmf}。${w.def}`);
+            
+            // 標記為已完成
+            g3CompletedPairs.add(w.han);
+            
+            // 移除對應的詞語卡片
+            const chip = [...pool.children].find(c=>c.getAttribute('data-word')===w.han);
+            if(chip) {
+              chip.style.transition = 'all 0.3s ease';
+              chip.style.opacity = '0';
+              chip.style.transform = 'scale(0.8)';
+              setTimeout(() => {
+                chip.remove();
+                reorganizeWordChips();
+              }, 300);
+            }
+            
+            // 移除已完成的解釋框並重新整理
+            setTimeout(() => {
+              box.style.transition = 'all 0.3s ease';
+              box.style.opacity = '0';
+              box.style.transform = 'translateY(-10px)';
+              setTimeout(() => {
+                box.remove();
+                reorganizeDefinitions();
+              }, 300);
+            }, 1000);
+            
+            g3SelectedWord = null;
+            document.querySelectorAll('.word-chip').forEach(c => c.classList.remove('selected'));
+            
+          } else {
+            box.classList.add('no');
+            speak('這個解釋不太對，再想想');
+            setTimeout(()=>box.classList.remove('no'), 600);
+          }
+        });
+        
+        box.addEventListener('mouseenter', ()=> {
+          if(g3SelectedWord && !g3CompletedPairs.has(w.han)) {
+            box.classList.add('highlighted');
+          }
+        });
+        
+        box.addEventListener('mouseleave', ()=> {
+          box.classList.remove('highlighted');
+        });
+        
+        defs.appendChild(box);
+      });
+    }
+
+    // 重新整理詞語卡片排列
+    function reorganizeWordChips(){
+      const pool = document.getElementById('g3Words');
+      const chips = [...pool.children];
+      chips.forEach((chip, index) => {
+        chip.style.transition = 'all 0.3s ease';
+        chip.style.transform = 'translateY(0)';
+      });
+    }
+
+    // 重新整理解釋區域排列
+    function reorganizeDefinitions(){
+      const defs = document.getElementById('g3Defs');
+      const boxes = [...defs.children];
+      boxes.forEach((box, index) => {
+        box.style.transition = 'all 0.3s ease';
+        box.style.transform = 'translateY(0)';
+      });
+    }
+
+    // ========= 關卡四：唸謠朗讀 =========
+    let g4Playing = false;
+    function initG4(){
+      const wrap = document.getElementById('g4Lines');
+      wrap.innerHTML = '';
+
+      // 建立兩個子容器，分別放前四句和後三句
+      const col1 = document.createElement('div');
+      const col2 = document.createElement('div');
+      wrap.appendChild(col1);
+      wrap.appendChild(col2);
+
+      rhymeLines.forEach((t,i)=>{
+        const line = document.createElement('div');
+        line.className=`g4-line ${t.color}`;
+        line.textContent = t.text;
+        line.tabIndex=0;
+
+        const iconSpan = document.createElement('span');
+        iconSpan.className='g4-line-icon';
+        iconSpan.textContent = t.icon;
+        line.prepend(iconSpan);
+
+        line.addEventListener('click', ()=>{
+          highlightLine(i);
+          speak(t.text, 0.95);
+        });
+        if (i < 4) {
+          col1.appendChild(line);
+        } else {
+          col2.appendChild(line);
+        }
+      });
+
+      document.getElementById('g4PlaySeq').onclick = async ()=>{
+        g4Playing = true;
+        for(let i=0;i<rhymeLines.length && g4Playing;i++){
+          highlightLine(i);
+          speak(rhymeLines[i].text, 0.95);
+          // Wait for a little longer, to give user time to repeat
+          await waitSpeakEnd(1200 + rhymeLines[i].text.length*80);
+        }
+        if(g4Playing){
+          addScore(2);
+          confettiBurst();
+          speak('朗讀完成，太棒了！');
+        }
+        g4Playing = false;
+        highlightLine(-1);
+      };
+      document.getElementById('g4Stop').onclick = ()=>{
+        g4Playing = false;
+        window.speechSynthesis.cancel();
+        highlightLine(-1);
+      };
+    }
+    function highlightLine(idx){
+      [...document.querySelectorAll('#g4Lines .g4-line')].forEach((n,i)=>{
+        n.classList.toggle('active', i===idx);
+      });
+    }
+    function waitSpeakEnd(ms){
+      return new Promise(res=> setTimeout(res, ms));
+    }
+
+    // ========= 導覽 =========
+    document.querySelectorAll('.tab').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const id = btn.dataset.tab;
+        document.querySelectorAll('.panel').forEach(p=>{
+          p.classList.toggle('active', p.id===id);
+        });
+      });
+    });
+
+    // ========= 頁面控制 =========
+    document.getElementById('btnReset').onclick = resetAll;
+    document.getElementById('btnSpeakAll').onclick = ()=> speak('芸辦字「各」字族，小小文字探險，準備開始！');
+    document.getElementById('btnVoiceCheck').onclick = ()=>{
+      loadVoices();
+      speak('語音測試。你好，我們一起學習「各」字族。');
+    };
+
+    // 初始化
+    initG1(); initG2(); initG3(); initG4();
+  </script>
+</body>
+</html>
